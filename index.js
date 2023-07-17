@@ -13,8 +13,8 @@ app.use(cors());
 
 const port = process.env.PORT || 4000
 
-
 const accRoutes = require('./routes/accounts')
+const menuRoutes = require('./routes/menu')
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -26,6 +26,8 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
 );
 
 app.use('/api/account', accRoutes)
+app.use('/api/menu', menuRoutes)
+
 
 app.listen(port, () => {
     console.log(`Listening at port ${port}:`)

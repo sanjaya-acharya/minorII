@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  background-color: grey;
+}
+
+.navbar a {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 15px 20px;
+}
+
+.navbar:hover {
+  cursor: pointer;
+}
+
+.navbar a:hover {
+  background-color: #555;
+}
+
+img {
+  width: 200px;
+}
