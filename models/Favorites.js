@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const cartSchema = new mongoose.Schema({
+const FavSchema = new mongoose.Schema({
 	userID: {
 		type: String,
 		required: true
@@ -11,5 +11,5 @@ const cartSchema = new mongoose.Schema({
 	}
 });
 
-let collectionName = 'carts'
-module.exports = mongoose.model(collectionName, cartSchema);
+let collectionName = 'favorites'
+module.exports = mongoose.model(collectionName, FavSchema);

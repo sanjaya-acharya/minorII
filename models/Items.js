@@ -9,18 +9,20 @@ const itemSchema = new mongoose.Schema({
 		type: Number,
 		required: true
 	},
-	imageURL: {
+	itemImage: {
 		type: String,
 		required: true
 	},
-	ratingsCount: {
-		type: Number
-	},
-	ratingsSum: {
-		type: Number
+	rating: {
+		type: Number,
+		default: 0
 	},
 	description: {
 		type: String
+	},
+	availability: {
+		type: Boolean,
+		default: true
 	}
 });
 

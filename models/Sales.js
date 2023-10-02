@@ -7,7 +7,7 @@ const saleSchema = new mongoose.Schema({
 	},
 	Quantity: {
 		type: Number,
-		required: true
+		default: 0
 	},
 	date: {
 		type: Date,

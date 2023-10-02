@@ -1,25 +1,42 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-	userID: {
-		type: String,
-		required: true
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User', // Reference to the User model
+		required: true,
 	},
-	itemID: {
-		type: String,
-		required: true
+	cartItems: [
+		{
+			itemId: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Item', // Reference to the Item model
+			},
+			quantity: {
+				type: Number,
+				required: true,
+			},
+			itemImage: {
+				type: String,
+				required: true
+			}
+		},
+	],
+	orderDate: {
+		type: Date,
+		default: Date.now,
 	},
-	itemQuantity: {
+	totalAmount: {
 		type: Number,
-		required: true
+		required: true,
 	},
-	tableNumber: {
-		type: Number,
-		required: true
+	expectedTime: {
+		type: Date,
+		default: Date.now()
 	},
-	orderStatus: {
+	status: {
 		type: String,
-		required: true
+		default: 'unpaid'
 	}
 });
 

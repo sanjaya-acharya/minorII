@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
+    <title>OTP for {{reason}}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,21 +38,21 @@
         }
 
         .note {
-            color: #ccc; /* Lighter text color for notes in dark mode */
+            color: #ff3300;
         }
 
         .footer {
             margin-top: 20px;
             text-align: center;
-            color: #888; /* Lighter text color for footer */
+            color: #888;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Reset Password</h1>
+        <h1>OTP for {{reason}}</h1>
         <p>Dear User,</p>
-        <p>Your one-time password (OTP) for password reset is:</p>
+        <p>Your one-time password (OTP) for {{reason}} is:</p>
         <p class="otp-code">{{otp}}</p>
         <p class="note">This OTP is valid for 2 minutes. Please do not share it with anyone.</p>
         <p>If you didn't request this OTP, you can safely ignore this email.</p>

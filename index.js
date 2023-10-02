@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
-const dotenv = require('dotenv');
 
+const dotenv = require('dotenv');
 dotenv.config();
+
+const port = process.env.PORT
 
 const cors = require('cors');
 
@@ -11,10 +13,11 @@ app.use(express.json())
 // Enable CORS
 app.use(cors());
 
-const port = process.env.PORT || 4000
-
-const accRoutes = require('./routes/accounts.js')
-const menuRoutes = require('./routes/menu')
+const accRoutes = require('./routes/accounts')
+const itemRoutes = require('./routes/items')
+const cartRoutes = require('./routes/cart')
+const favRoutes = require('./routes/favorites')
+const orderRoutes = require('./routes/orders')
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -25,8 +28,11 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology
   }
 );
 
-app.use('/api/account', accRoutes)
-app.use('/api/menu', menuRoutes)
+app.use('/api/accounts', accRoutes)
+app.use('/api/items', itemRoutes)
+app.use('/api/cart', cartRoutes)
+app.use('/api/favourites', favRoutes)
+app.use('/api/orders', orderRoutes)
 
 
 app.listen(port, () => {

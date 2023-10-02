@@ -18,9 +18,12 @@ const userSchema = new mongoose.Schema({
 		type: Number,
 		default: 0
 	},
-	status: {
-		type: String,
-		default: "active"
+	active: {
+		type: Boolean,
+		required: true
+	},
+	message: {
+		type: String
 	}
 });
 
