@@ -1,6 +1,6 @@
 const Promotions = require('../../models/Promotions');
 
-const removePromotion = async (req, res) => {
+const removePromotions = async (req, res) => {
     const { promotionID } = req.body;
 
     try {
@@ -17,4 +17,4 @@ const removePromotion = async (req, res) => {
     }
 };
 
-module.exports = { removePromotion };
+module.exports = { removePromotions };

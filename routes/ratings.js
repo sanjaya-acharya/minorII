@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-// const account = require('../controllers/account')
+const { getRating } = require('../controllers/ratings/getRating')
+const { giveRating } = require('../controllers/ratings/giveRating')
+const { removeRating } = require('../controllers/ratings/removeRating')
 
-// router.post('/register', account.register)
-// router.post('/login', account.login)
-// router.post('/loadinfo', account.loadInfo)
-// router.post('/deleteuser', account.deleteUser)
-// router.post('/changepassword', account.changePassword)
+router.post('/getRating', getRating)
+router.post('/giveRating', giveRating)
+router.post('/removeRating', removeRating)
 
 module.exports = router

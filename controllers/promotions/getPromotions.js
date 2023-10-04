@@ -32,4 +32,4 @@ const getPromotions = async (req, res) => {
     }
 };
 
-module.exports = { getCartItems };
+module.exports = { getPromotions };

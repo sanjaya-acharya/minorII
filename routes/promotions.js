@@ -1,12 +1,14 @@
 const express = require('express')
 const router = express.Router()
 
-// const account = require('../controllers/account')
+const { addPromotion } = require('../controllers/promotions/addPromotion')
+const { getPromotions } = require('../controllers/promotions/getPromotions')
+const { removePromotions } = require('../controllers/promotions/removePromotions')
+const { updatePromotion } = require('../controllers/promotions/updatePromotion')
 
-// router.post('/register', account.register)
-// router.post('/login', account.login)
-// router.post('/loadinfo', account.loadInfo)
-// router.post('/deleteuser', account.deleteUser)
-// router.post('/changepassword', account.changePassword)
+router.post('/addPromotion', addPromotion)
+router.post('/getPromotions', getPromotions)
+router.post('/removePromotions', removePromotions)
+router.post('/updatePromotion', updatePromotion)
 
 module.exports = router
