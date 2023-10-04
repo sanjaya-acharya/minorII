@@ -18,9 +18,8 @@ const getOrder = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
     try {
-        // Find all orders, excluding canceled orders
-        const orderItems = await Orders.find({ status: { $ne: 'canceled' } })
-            .sort({ expectedTime: 1 }); // Sort by expectedTime in ascending order
+        const orderItems = await Orders.find({ status: { $nin: ['completed', 'cancelled'] } })
+            .sort({ expectedTime: 1 });
 
         if (!orderItems || orderItems.length === 0) {
             return res.status(404).json({ message: 'No orders found' });
