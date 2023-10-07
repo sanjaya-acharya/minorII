@@ -1,0 +1,40 @@
+/* Cart.css */
+.cart-container {
+  display: flex;
+}
+
+.cart-items-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.order-summary-container {
+  flex: 0 0 300px;
+  margin-right: 20px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.continue-shopping-btn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.continue-shopping-btn:hover {
+  background-color: #2980b9;
+}
+
+.empty-cart {
+  font-weight: bold;
+  font-size: larger;
+}
