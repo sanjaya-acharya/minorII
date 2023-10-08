@@ -16,7 +16,7 @@ const ProductBox = ({ item }) => {
                     setIsFavorite(response.data.isFavorite);
                 });
         }
-    }, [item._id])
+    }, [isFavorite])
 
     const handleFavoriteClick = () => {
         const userID = sessionStorage.getItem('userID');

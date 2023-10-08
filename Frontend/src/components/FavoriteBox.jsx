@@ -1,12 +1,16 @@
-// FavoriteBox.jsx
-import React from 'react';
+import '../styles/ProductBox.css';
+
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const FavoriteBox = ({ item }) => {
+    console.log(item)
     const navigate = useNavigate();
 
-    const handleProductBoxClick = () => {
-        navigate(`/productDescription/${item._id}`);
+    const handleProductBoxClick = (event) => {
+        if (event.target.tagName.toLowerCase() !== 'button') {
+            navigate(`/productDescription/${item._id}`);
+        }
     };
 
     const addToCart = () => {
@@ -17,7 +21,7 @@ const FavoriteBox = ({ item }) => {
             return;
         }
 
-        axios.post("http://localhost:4000/api/cart/addtocart", { userID, itemID: item._id })
+        axios.post("http://localhost:4000/api/cart/addtocart", { userID, itemID: item.itemID })
             .then(
                 response => {
                     console.log(response.data.message);
@@ -36,12 +40,9 @@ const FavoriteBox = ({ item }) => {
                 />
             )}
             <p className="ProductInfo">{item.itemName}</p>
-            <p className="ProductInfo">Rs. 130</p>
-            <p className="ProductInfo">⭐ 4</p>
+            <p className="ProductInfo">Rs. {item.itemPrice}</p>
             <div className="ProductButtons">
-                <button className="cart-btn" onClick={addToCart}>
-                    Add to Cart
-                </button>
+                <button className="cart-btn" onClick={addToCart}>Add to Cart</button>
             </div>
         </div>
     );

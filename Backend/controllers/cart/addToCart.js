@@ -2,7 +2,7 @@ const Cart = require('../../models/Cart');
 
 const addToCart = async (req, res) => {
     try {
-        const { userID, itemID } = req.body;
+        const { userID, itemID, quantity } = req.body;
 
         const cartItem = await Cart.findOne({userID, itemID})
 
@@ -11,8 +11,9 @@ const addToCart = async (req, res) => {
         }
 
         const newCartItem = new Cart({
-            userID: userID,
-            itemID: itemID
+            userID,
+            itemID,
+            quantity
         });
 
         await newCartItem.save();

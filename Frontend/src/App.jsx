@@ -2,11 +2,6 @@ import "./App.css";
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Admin from './components/Admin';
-import ItemList from './components/ItemList';
-import AddItem from './components/AddItem';
-import UpdateItem from './components/UpdateItem';
-
 import Homepage from './components/Homepage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
@@ -18,8 +13,8 @@ import Orders from './components/Orders';
 import OrderDescription from './components/OrderDescription';
 
 function App() {
-    // sessionStorage.setItem('userID', '650ea44d5cc1a9050f51fe66');
-    // sessionStorage.setItem('loggedIn', 'true');
+    sessionStorage.setItem('userID', '650ea44d5cc1a9050f51fe66');
+    sessionStorage.setItem('loggedIn', 'true');
 
     const isLoggedIn = (!!sessionStorage.getItem('userID') && sessionStorage.getItem('loggedIn') === 'true');
 
@@ -48,9 +43,6 @@ function App() {
                 </nav>
 
                 <Routes>
-                    <Route path="/admin/items" element={<ItemList />} />
-                    <Route path="/admin/add" element={<AddItem />} />
-                    <Route path="/admin/update" element={<UpdateItem />} />
                     <Route path="/" element={<Homepage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
@@ -60,7 +52,6 @@ function App() {
                     <Route path="/productDescription/:itemID" element={<ProductDescription />} />
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/orderDescription/:orderID" element={<OrderDescription />} />
-                    <Route path="/admin" element={<Admin />} />
                 </Routes>
             </div>
         </Router>

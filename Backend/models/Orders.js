@@ -8,13 +8,17 @@ const orderSchema = new mongoose.Schema({
 	},
 	cartItems: [
 		{
-			itemID: {
+			cartID: {
 				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Item', // Reference to the Item model
+				ref: 'Cart', // Reference to the Cart model
 			},
 			quantity: {
 				type: Number,
 				required: true,
+			},
+			price:{
+				type: Number,
+				requied: true
 			},
 			itemImage: {
 				type: String,

@@ -15,7 +15,7 @@ const OrderSummary = ({ cartItems, userID, onUpdateCartItems }) => {
     }, [cartItems]);
 
     const handleCheckout = async () => {
-        const requestBody = { userID, cartItems, totalAmount};
+        const requestBody = { userID, cartItems, totalAmount };
 
         try {
             await axios.post('http://localhost:4000/api/orders/makeOrder', requestBody);

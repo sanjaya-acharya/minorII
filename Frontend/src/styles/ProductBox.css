@@ -1,6 +1,6 @@
 .ProductBox {
     position: relative;
-    background-color: rgba(85, 80, 90, 0.5);
+    background-color: rgba(90, 80, 90, 0.5);
     color: #FFF;
     border: 1px solid #ccc;
     padding: 10px;
@@ -15,8 +15,8 @@
 }
 
 .ProductImage {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 200px;
 }
 
 .ProductInfo {
