@@ -7,13 +7,16 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import Profile from './components/Profile';
 import Cart from './components/Cart';
+import Favorites from './components/Favorites';
 import ProductDescription from './components/ProductDescription';
 import Orders from './components/Orders';
 import OrderDescription from './components/OrderDescription';
 
 function App() {
     // sessionStorage.setItem('userID', '650ea44d5cc1a9050f51fe66');
-    const isLoggedIn = !!sessionStorage.getItem('userID');
+    // sessionStorage.setItem('loggedIn', 'true');
+
+    const isLoggedIn = (!!sessionStorage.getItem('userID') && sessionStorage.getItem('loggedIn') === 'true');
 
     return (
         <Router>
@@ -27,7 +30,8 @@ function App() {
                             <>
                                 <Link to="/cart">Cart</Link>
                                 <Link to="/orders">Orders</Link>
-                                <Link to="/profile">Profile</Link>
+                                <Link to="/favorites">My Favorites</Link>
+                                <Link to="/profile">Logout</Link>
                             </>
                         ) : (
                             <>
@@ -43,6 +47,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/favorites" element={<Favorites />} />
                     {isLoggedIn && <Route path="/profile" element={<Profile />} />}
                     <Route path="/productDescription/:itemID" element={<ProductDescription />} />
                     <Route path="/orders" element={<Orders />} />

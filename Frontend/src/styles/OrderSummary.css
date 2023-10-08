@@ -1,23 +1,18 @@
 /* OrderSummary.css */
-.order-summary-container {
-    margin-top: 20px;
-}
 
 .order-summary-container {
-    border: 1px solid #ccc;
+    margin-top: 20px;
+    background-color: #a9a9a9;
     padding: 15px;
     margin-top: 20px;
 }
 
 .order-summary-container div {
-    margin: 0;
-}
-
-.order-summary-container input {
-    margin: 10px 0;
+    text-align: center;
 }
 
 .order-summary-container button {
+    margin-top: 40px;
     background-color: #2ecc71;
     color: #fff;
     padding: 10px 20px;

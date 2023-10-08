@@ -19,9 +19,9 @@ const register = async (req, res) => {
         const newUser = new Users({
             fullname: fullname,
             email: email,
-            password: md5(password), // encryption
+            password: md5(password),
             points: 0,
-            active: false, // should verify email to be active
+            active: true, // should verify email to be active
             message: "Email not verified"  // should verify email to be active
         });
 

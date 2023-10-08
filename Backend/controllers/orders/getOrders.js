@@ -32,4 +32,21 @@ const getAllOrders = async (req, res) => {
     }
 };
 
-module.exports = { getOrder, getAllOrders };
+const getUserOrders = async (req, res) => {
+    const { userID } = req.body;
+
+    try {
+        const orderItems = await Orders.find({ userID });
+
+        if (!orderItems || orderItems.length === 0) {
+            return res.status(404).json({ message: 'No orders found' });
+        }
+
+        res.json(orderItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+module.exports = { getOrder, getAllOrders, getUserOrders };

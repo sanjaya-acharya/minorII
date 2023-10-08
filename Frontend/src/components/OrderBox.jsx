@@ -1,3 +1,4 @@
+import "../styles/OrderBox.css"
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +17,7 @@ export default function OrderBox({ item }) {
             <td>{item.totalAmount}</td>
             <td>{item.status}</td>
             <td>
-                <button onClick={handleViewOrder}>View Order</button>
+                <button className="view-btn" onClick={handleViewOrder}>View Order</button>
             </td>
         </tr>
     );

@@ -5,7 +5,6 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Find the user by email
         const user = await Users.findOne({ email: email });
 
         if (!user) {
@@ -17,7 +16,7 @@ const login = async (req, res) => {
         const hashedPassword = md5(password);
 
         if (user.password === hashedPassword) {
-            return res.status(200).json({ loginStatus: true, message: 'Login successful' });
+            return res.status(200).json({ loginStatus: true, message: 'Login successful', userID: user._id});
         } else {
             return res.status(200).json({ loginStatus: false, message: 'Invalid Password' });
         }

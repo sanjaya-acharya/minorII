@@ -1,14 +1,14 @@
 const Orders = require('../../models/Orders');
 
 const makeOrder = async (req, res) => {
-    const { userID, cartItems, totalAmount, expectedTime } = req.body;
+    const { userID, cartItems, totalAmount } = req.body;
     try {
         const newOrderItem = new Orders({
             userID: userID,
             cartItems: cartItems,
             totalAmount: totalAmount,
             orderDate: Date.now(),
-            expectedTime: expectedTime
+            expectedTime: Date.now()
         });
 
         await newOrderItem.save();

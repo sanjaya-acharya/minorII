@@ -74,16 +74,18 @@ const ProductBox = ({ item }) => {
                 />
             )}
             <p className="ProductInfo">{item.itemName}</p>
-            <p className="ProductInfo">${item.price}</p>
-            <p className="ProductInfo">Rating: {item.rating}</p>
+            <p className="ProductInfo">Rs. {item.price}</p>
+            <p className="ProductInfo">⭐ {item.rating}</p>
             <div className="ProductButtons">
-                <button onClick={addToCart}>Cart</button>
+                <button className="cart-btn" onClick={addToCart}>Add to Cart</button>
                 <button
                     className="FavButton"
                     onClick={handleFavoriteClick}
-                    style={{ fontWeight: isFavorite ? 'bold' : 'normal' }}
+                    style={{
+                        textShadow: isFavorite ? '0 0 5px rgba(255, 0, 0, 0.5)' : '0 0 5px rgba(255, 255, 255, 0.5)',
+                    }}
                 >
-                    Fav
+                    {isFavorite ? '❤️' : '🤍'}
                 </button>
             </div>
         </div>

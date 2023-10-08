@@ -1,0 +1,21 @@
+/* OrderDescription.css */
+.order-desc-container {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.order-desc-container div {
+    margin-bottom: 10px;
+}
+
+strong {
+    margin-right: 10px;
+    font-weight: bold;
+}
