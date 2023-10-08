@@ -1,10 +1,10 @@
 const Users = require('../../models/Users');
 
 const suspendUser = async (req, res) => {
-    const { email, message } = req.body;
+    const { userID, message } = req.body;
 
     try {
-        const user = await Users.findOne({ email });
+        const user = await Users.findOne({_id: userID});
 
         if (!user) {
             return res.status(200).json({ message: 'User not found' });

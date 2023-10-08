@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
 import { FaClipboardList } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
@@ -20,6 +20,15 @@ function MainLayout() {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(!!sessionStorage.getItem("isLoggedIn"));
+
+  useEffect(() => {
+      if (!isLoggedIn) {
+          navigate('/adminlogin');
+      }
+  }, [isLoggedIn]);
+
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -36,6 +45,7 @@ function MainLayout() {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key == "signout") {
+              sessionStorage.clear();
             } else {
               navigate(key);
             }
@@ -108,8 +118,14 @@ function MainLayout() {
                 <p className="mb-0">Welcome</p>
                 <h5 className="mb-0">{sessionStorage.getItem("adminName")}</h5>
               </div>
-              <button>SignOut</button>
-              <VscSignOut />
+              <button onClick={()=>{
+                sessionStorage.clear();
+                window.location.reload();
+              }}>SignOut</button>
+              <VscSignOut onClick={()=>{
+                sessionStorage.clear();
+                window.location.reload();
+              }}/>
             </div>
           </div>
         </Header>

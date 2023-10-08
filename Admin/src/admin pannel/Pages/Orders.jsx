@@ -49,10 +49,7 @@ const Orders = () => {
 
   const markCompleted = async (id) => {
     try {
-      let result = await axios.delete(
-        `http://localhost:4000/api/brand/updates/${id}`
-      );
-      console.log("Item deleted successfully");
+      console.log("Item marked successfully");
     } catch (error) {
       console.log(error);
     }

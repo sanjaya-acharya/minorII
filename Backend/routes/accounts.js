@@ -10,6 +10,7 @@ const { sendOTP } = require('../controllers/account/sendOTP')
 const { verifyOTP } = require('../controllers/account/verifyOTP')
 const { suspendUser } = require('../controllers/account/suspendUser')
 const { removeSuspension } = require('../controllers/account/removeSuspension')
+const {customers} = require('../controllers/account/customers')
 
 router.post('/register', register)
 router.post('/login', login)
@@ -20,5 +21,6 @@ router.post('/sendotp', sendOTP)
 router.post('/verifyotp', verifyOTP)
 router.post('/suspendUser', suspendUser)
 router.post('/removeSuspension', removeSuspension)
+router.post('/customers', customers)
 
 module.exports = router
