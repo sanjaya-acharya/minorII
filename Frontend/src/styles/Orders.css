@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+    min-width: 800px;
+    margin: auto;
+}
+
+td,th {
+    padding: 5px 10px;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.no-orders {
+    height: 100px;
+}
+

@@ -1,0 +1,59 @@
+/* CartBox.css */
+.cart-box-container {
+    background-color: #a9a9a9;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.cart-box-container img {
+    width: 100px;
+    height: 100px;
+    margin: 0 15px;
+
+}
+
+.left-50 {
+    margin-left: 50px !important;
+}
+
+.cart-box-container div {
+    margin-right: 20px;
+}
+
+.cart-box-container button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    margin-left: 0px;
+}
+
+.quantity-box {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.cart-box-container button.remove-button {
+    background-color: #e74c3c;
+    margin-left: auto;
+    color: #fff;
+}
+
+.cart-box-container button.remove-button:hover {
+    background-color: #c0392b;
+    /* Darker red on hover */
+}
+
+.cart-box-container button.quantity-button {
+    background-color: #d3d3d3;
+    /* Greyish color */
+    color: #fff;
+}
+
+.cart-box-container button.quantity-button:hover {
+    background-color: #a9a9a9;
+    /* Darker grey on hover */
+}
