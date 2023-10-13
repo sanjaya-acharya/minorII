@@ -1,2 +1,0 @@
-# minorII
-Minor project II
