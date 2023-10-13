@@ -2,12 +2,12 @@ const Cart = require('../../models/Cart');
 
 const addToCart = async (req, res) => {
     try {
-        const { userID, itemID, quantity } = req.body;
-
-        const cartItem = await Cart.findOne({userID, itemID})
+        const { userID, itemID } = req.body;
+        const quantity = 1;
+        const cartItem = await Cart.findOne({ userID, itemID })
 
         if (cartItem) {
-            return res.json({message: "Item already exists in cart"})
+            return res.json({ message: "Item already exists in cart" })
         }
 
         const newCartItem = new Cart({
@@ -22,7 +22,7 @@ const addToCart = async (req, res) => {
             message: 'Item added to cart!',
         });
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error' + error });
     }
 };
 

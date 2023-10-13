@@ -41,21 +41,6 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/promotions', promotionRoutes)
 app.use('/api/ratings', ratingRoutes)
 
-/*
-// Payment Integration
-app.use("/khalti-api", (req, res) => {
-    const payload = req.body;
-    const khaltiResponse = await axios.post('https://a.khalti.com/api/v2/',
-    payload,
-    {
-        headers: {
-            Authoriazation: ``;
-        }
-    }
-    )
-})
-*/
-
- app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Listening at port ${port}:`)
 })

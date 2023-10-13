@@ -13,9 +13,6 @@ import Orders from './components/Orders';
 import OrderDescription from './components/OrderDescription';
 
 function App() {
-    sessionStorage.setItem('userID', '650ea44d5cc1a9050f51fe66');
-    sessionStorage.setItem('loggedIn', 'true');
-
     const isLoggedIn = (!!sessionStorage.getItem('userID') && sessionStorage.getItem('loggedIn') === 'true');
 
     return (

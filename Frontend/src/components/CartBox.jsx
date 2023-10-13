@@ -1,41 +1,49 @@
-// CartBox.js
-import React, { useState } from 'react';
-import '../styles/CartBox.css';
+import React, { useState } from "react";
 
-const CartBox = ({ item, onRemove, onCheckboxChange, onQuantityChange }) => {
-    const [quantity, setQuantity] = useState(1);
-    const [isBoxChecked, setIsChecked] = useState(false);
+const CartBox = ({ cartItem, onToggle, onUpdateQuantity, onDelete }) => {
+  const { cartID, isIncluded, itemImage, itemName, price } = cartItem;
+  const [quantity, setQuantity] = useState(1);
 
-    const handleQuantityChange = (change) => {
-        const newQuantity = Math.min(20, Math.max(1, quantity + change));
-        setQuantity(newQuantity);
-        onQuantityChange(item.itemID, newQuantity);
-    };
+  const handleQuantityChange = (newQuantity) => {
+    newQuantity = newQuantity === "" ? 1 : parseInt(newQuantity, 10);
 
-    const handleCheckboxChange = (e) => {
-        const isChecked = e.target.checked;
-        setIsChecked(isChecked);
-        onCheckboxChange(item.itemID, isChecked);
-    };
+    if (isNaN(newQuantity) || newQuantity < 1) {
+      newQuantity = 1;
+    } else if (newQuantity > 20) {
+      newQuantity = 20;
+    }
 
-    return (
-        <div className="cart-box-container">
-            <input value={isBoxChecked} type="checkbox" onChange={handleCheckboxChange} />
-            <img src={`http://localhost:4000/uploads/${item.itemImage}`} alt={item.name} />
-            <div>{item.name}</div>
-            <div>Rs. {item.price}</div>
-            <div>
-                <button className="left-50" onClick={() => handleQuantityChange(-1)}>
-                    -
-                </button>
-                <span className="quantity-box">{quantity}</span>
-                <button onClick={() => handleQuantityChange(1)}>+</button>
-            </div>
-            <button className="remove-button" onClick={() => onRemove(item.itemID)}>
-                Remove
-            </button>
-        </div>
-    );
+    setQuantity(newQuantity);
+    onUpdateQuantity(cartID, newQuantity);
+  };
+  return (
+    <div className="cart-box">
+      <input
+        type="checkbox"
+        name="isincluded"
+        checked={isIncluded}
+        onChange={() => onToggle(cartID)}
+      />
+      <img src={`http://localhost:4000/uploads/${itemImage}`} alt={itemName} width="80" height="80" />
+      <p>{itemName}</p>
+      <p>Rs. {price}</p>
+      <div className="quantity-wrapper">
+        <button onClick={() => handleQuantityChange(quantity - 1)}>-</button>
+        <input
+          type="number"
+          name="quantity"
+          value={quantity}
+          min="1"
+          max="20"
+          onChange={(e) => handleQuantityChange(e.target.value)}
+        />
+        <button onClick={() => handleQuantityChange(quantity + 1)}>+</button>
+      </div>
+      <button className="delete-btn" onClick={() => onDelete(cartID)}>
+        Delete
+      </button>
+    </div>
+  );
 };
 
 export default CartBox;

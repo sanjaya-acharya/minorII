@@ -1,20 +1,23 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-	userID: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User', // Reference to the User model
-		required: true,
+	emailID: {
+		type: String,
+		required: true
 	},
 	cartItems: [
 		{
 			cartID: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Cart', // Reference to the Cart model
+				type: String,
+				required:true,
 			},
 			quantity: {
 				type: Number,
 				required: true,
+			},
+			itemName:{
+				type:String,
+				required: true
 			},
 			price:{
 				type: Number,

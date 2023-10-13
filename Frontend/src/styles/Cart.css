@@ -1,21 +1,19 @@
-/* Cart.css */
 .cart-container {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 70vw;
 }
 
-.cart-items-container {
+.cart-boxes-container {
   flex: 1;
   margin-right: 20px;
 }
 
 .order-summary-container {
   flex: 0 0 300px;
-  margin-right: 20px;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
+  width: 150px;
+  margin-left: -23px;
 }
 
 .continue-shopping-btn {
@@ -26,7 +24,6 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
-  margin-left: 20px;
   text-decoration: none;
 }
 
@@ -37,4 +34,95 @@
 .empty-cart {
   font-weight: bold;
   font-size: larger;
+}
+
+/* CartBox.css */
+.cart-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  font-size: 18px;
+}
+
+.cart-box input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.cart-box img {
+  margin: 10px;
+  width: 90px;
+  height: 70px;
+}
+
+.cart-box p {
+  margin-right: 250px;
+}
+
+.cart-box .quantity-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.quantity-wrapper button {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+
+.quantity-wrapper input {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.cart-box button {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.order-summary-container {
+  background-color: #cdcdcd;
+  padding: 20px;
+}
+
+.checkout-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Remove arrow from number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  /* Firefox */
 }

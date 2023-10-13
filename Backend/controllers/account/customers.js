@@ -5,7 +5,7 @@ const customers = async (req, res) => {
         const users = await Users.find();
         const formattedUsers = users.map((user) => ({
             fullname: user.fullname,
-            userID: user._id, // Assuming MongoDB generates the userID
+            userID: user._id,
             active: user.active,
             action: user.active ? 'Suspend' : 'Remove Suspension',
         }));

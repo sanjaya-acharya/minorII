@@ -1,90 +1,90 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button } from "@chakra-ui/react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const Orders = () => {
-  const [data, setData] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchOrders = async () => {
       try {
-        const response = await axios.post("http://localhost:4000/api/orders/getAllOrders", { userID: sessionStorage.getItem("userID") });
-        const items = response.data.flatMap(order =>
-          order.cartItems.map(cartItem => ({
-            itemID: cartItem.itemID,
-            quantity: cartItem.quantity,
-          }))
-        );
-
-        const transformedItems = await Promise.all(
-          items.map(async ({ itemID, quantity }) => {
-            try {
-              const response = await axios.post("http://localhost:4000/api/items/getItem", { itemID });
-              const itemName = response.data.itemName;
-              return { itemName, quantity };
-            } catch (error) {
-              console.error("Error fetching item details for itemID", error);
-              return null;
-            }
-          })
-        );
-
-        setData(transformedItems.filter(Boolean));
-
+        const response = await axios.post("http://localhost:4000/api/orders/getAllOrders");
+        setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders", error);
       }
     };
 
-    fetchData();
-  }, [])
+    fetchOrders();
+  }, []);
 
-  const markCompleted = async (id) => {
-    try {
-      console.log("Item marked successfully");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const generatePDF = (order) => {
+  const doc = new jsPDF();
+
+  // Add title
+  doc.setFontSize(16);
+  doc.text("SNS COFFEE SHOP", doc.internal.pageSize.width / 2, 10, "center");
+  doc.text("", doc.internal.pageSize.width / 2, 16); // Line break
+
+  // Add date and order ID
+  doc.text(`Date: ${new Date().toISOString().split('T')[0]}`, doc.internal.pageSize.width - 20, 20, "right");
+  doc.text(`Order ID: ${order._id}`, 20, 20);
+  doc.text("", 20, 26); // Line break
+  doc.text("", 20, 26); // Line break
+
+  // Add table headers
+  const headers = ["Name", "Price", "Quantity", "Amount"];
+  const data = order.cartItems.map(item => [item.itemName, `Rs. ${item.price}`, item.quantity, `Rs. ${item.price * item.quantity}`]);
+  while (data.length < 10) {
+    data.push(["", "", "", ""]); // Add empty rows if there are fewer than 10 items
+  }
+
+  // Add auto-table
+  doc.autoTable({
+    head: [headers],
+    body: data,
+    startY: 30,
+    theme: 'striped', // Optional: Add a striped theme to the table
+  });
+
+  // Add email and signature
+  doc.text(`Email: ${order.emailID}`, 20, doc.autoTable.previous.finalY + 10);
+  doc.text("Signature: __________", doc.internal.pageSize.width - 20, doc.autoTable.previous.finalY + 10, "right");
+
+  doc.save("coffee_bill.pdf");
+};
 
   return (
-    <TableContainer>
-      <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>SN</Th>
-            <Th>Coffee Orders</Th>
-            <Th>Quantity</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {data?.map((d, index) => (
-            <Tr key={index}>
-              <Td>{index + 1}</Td>
-              <Td>{d.itemName}</Td>
-              <Td>{d.quantity}</Td>
-              <Td>
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={() => markCompleted(d._id)}
-                >
-                  Mark Completed
-                </button>
-              </Td>
+    <div>
+      <TableContainer>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>Order ID</Th>
+              <Th>Email</Th>
+              <Th>Total Amount</Th>
+              <Th>Actions</Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+          </Thead>
+          <Tbody>
+            {orders.map((order) => (
+              <Tr key={order._id}>
+                <Td>{order._id}</Td>
+                <Td>{order.emailID}</Td>
+                <Td>Rs. {order.totalAmount}</Td>
+                <Td>
+                  <Button colorScheme="blue" onClick={() => generatePDF(order)}>
+                    Download Bill
+                  </Button>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

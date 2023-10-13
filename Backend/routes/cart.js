@@ -5,8 +5,10 @@ const { addToCart } = require('../controllers/cart/addToCart')
 const { getCartItems } = require('../controllers/cart/getCartItems')
 const { removeFromCart } = require('../controllers/cart/removeFromCart')
 
-router.post('/addToCart', addToCart)
-router.post('/getCartItems', getCartItems)
-router.post('/removeFromCart', removeFromCart)
+const { authenticateUser } = require("../controllers/account/login");
 
-module.exports = router
+router.post('/addToCart', authenticateUser, addToCart)
+router.post('/getCartItems', authenticateUser, getCartItems)
+router.post('/removeFromCart', authenticateUser, removeFromCart)
+
+module.exports = router;

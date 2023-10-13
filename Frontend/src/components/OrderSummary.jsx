@@ -1,38 +1,35 @@
-// OrderSummary.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import '../styles/OrderSummary.css';
+import React from "react";
+import axios from "axios";
 
-const OrderSummary = ({ cartItems, userID, onUpdateCartItems }) => {
-    const [totalAmount, setTotalAmount] = useState(0);
+const OrderSummary = ({ order, onCheckout }) => {
+  const handleCheckout = () => {
+    const selectedCartItems = order.cartItems.filter(cartItem => cartItem.isIncluded);
 
-    useEffect(() => {
-        const newTotalAmount = cartItems.reduce(
-            (acc, item) => acc + (item.isChecked ? item.price * item.quantity : 0),
-            0
-        );
-        setTotalAmount(newTotalAmount);
-    }, [cartItems]);
+    if (selectedCartItems.length > 0) {
+      const transformedOrder = {
+        emailID: "nishantapaudel9@gmail.com",
+        cartItems: selectedCartItems,
+        totalAmount: order.totalAmount,
+      };
 
-    const handleCheckout = async () => {
-        const requestBody = { userID, cartItems, totalAmount };
+      console.log(transformedOrder);
+      axios.post("http://localhost:4000/api/orders/makeOrder", transformedOrder).then(()=>{console.log("order made")})
 
-        try {
-            await axios.post('http://localhost:4000/api/orders/makeOrder', requestBody);
-            onUpdateCartItems([]);
-        } catch (error) {
-            console.error('Error making order:', error);
-        }
-    };
 
-    console.log(totalAmount)
-    return (<>
-        <div className="order-summary-container">
-            <div>Total Amount: Rs. {totalAmount}</div>
-        </div>
-        <button onClick={handleCheckout}>Checkout</button>
-    </>
-    );
+      // Assuming newCartItems is defined elsewhere in your component
+      onCheckout(transformedOrder);
+    }
+  };
+
+  return (
+    <div className="order-summary-container">
+      <h2>Order Summary</h2>
+      <div>Total amount = Rs. {order.totalAmount}</div>
+      <button className="checkout-btn" onClick={handleCheckout}>
+        Checkout
+      </button>
+    </div>
+  );
 };
 
 export default OrderSummary;

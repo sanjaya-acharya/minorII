@@ -15,7 +15,7 @@ const getRating = async (req, res) => {
         const ratings = await Rating.find({ itemID });
 
         if (!ratings || ratings.length === 0) {
-            return res.status(200).json({ message: 'No ratings found for the item' });
+            return res.status(200).json({ averageStars: 0, totalRatings: 0, message: 'No ratings found for the item' });
         }
 
         const totalStars = ratings.reduce((sum, rating) => sum + rating.stars, 0);
@@ -24,7 +24,7 @@ const getRating = async (req, res) => {
         res.json({ averageStars, totalRatings: ratings.length });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ averageStars: 0, totalRatings: 0, error: 'Internal Server Error' });
     }
 };
 

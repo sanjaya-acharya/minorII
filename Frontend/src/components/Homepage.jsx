@@ -5,10 +5,8 @@ import Products from "../components/Products"
 const Homepage = () => {
     return (
         <div className="A">
-            {/* 
-            <Promotions />
-            <UsersChoice />
-        */}
+            {/* <Promotions />
+            <UsersChoice /> */}
             <Products />
         </div>
     );
