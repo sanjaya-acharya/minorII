@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 const generateAuthToken = (userID) => {
     // Generate an access token
-    const accessToken = jwt.sign({ user: userID }, LOGIN_SECRET_KEY, { expiresIn: '1m' });
+    const accessToken = jwt.sign({ user: userID }, LOGIN_SECRET_KEY, { expiresIn: '15m' });
 
     // Generate a refresh token
     const refreshToken = jwt.sign({ user: userID }, TOKEN_REFRESH_KEY, { expiresIn: '15m' });
@@ -79,7 +79,7 @@ const refreshAccessToken = async (req, res) => {
         const user = await verifyToken(refreshToken, TOKEN_REFRESH_KEY);
 
         // If refresh token is valid, generate a new access token
-        const accessToken = jwt.sign({ email: user.email }, LOGIN_SECRET_KEY, { expiresIn: '30s' });
+        const accessToken = jwt.sign({ email: user.email }, LOGIN_SECRET_KEY, { expiresIn: '30m' });
 
         return res.status(200).json({ accessToken });
     } catch (error) {

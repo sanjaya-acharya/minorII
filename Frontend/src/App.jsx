@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import LoginPage from './components/LoginPage';
@@ -13,7 +13,12 @@ import Orders from './components/Orders';
 import OrderDescription from './components/OrderDescription';
 
 function App() {
-    const isLoggedIn = (!!sessionStorage.getItem('userID') && sessionStorage.getItem('loggedIn') === 'true');
+    const [navbarState, setNavbarState] = useState(false);
+
+    const isLoggedIn = (
+        !!sessionStorage.getItem('userID') &&
+        sessionStorage.getItem('loggedIn') == 'true'
+    );
 
     return (
         <Router>
@@ -28,7 +33,9 @@ function App() {
                                 <Link to="/cart">Cart</Link>
                                 <Link to="/orders">Orders</Link>
                                 <Link to="/favorites">My Favorites</Link>
-                                <Link to="/profile">Logout</Link>
+                                <Link to="/profile" onClick={() => setNavbarState(false)}>
+                                    Logout
+                                </Link>
                             </>
                         ) : (
                             <>
@@ -41,7 +48,7 @@ function App() {
 
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/login" element={<LoginPage setNavbarState={setNavbarState} />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/favorites" element={<Favorites />} />

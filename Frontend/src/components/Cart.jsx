@@ -5,6 +5,12 @@ import "../styles/Cart.css";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
+	if (!sessionStorage.getItem("userID")) {
+		return <div className="not-authorised">You are not authorised. <br/>
+		Click here to <Link to="/login">Login</Link>
+		</div>
+	}
+
 	const [cartItems, setCartItems] = useState([
 		{ cartID: "65122ac6f99a0f5f425c47e1", isIncluded: false, itemImage: "IMG-1.jpg", itemName: "Coffee1", price: 120, quantity: 1 },
 		{ cartID: "65122b230655fca8f4852110", isIncluded: false, itemImage: "IMG-2.jpg", itemName: "Coffee2", price: 120, quantity: 1 },
@@ -13,7 +19,7 @@ const Cart = () => {
 	]);
 
 	const [order, setOrder] = useState({
-		userID: 'user619',
+		userID: sessionStorage.getItem("userID"),
 		cartItems: [],
 		totalAmount: 0,
 	});

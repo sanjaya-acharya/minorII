@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import OrderBox from './OrderBox';
 import "../styles/Orders.css"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 export default function Orders() {
+    if (!sessionStorage.getItem("userID")) {
+        return <div className="not-authorised">You are not authorised. <br />
+            Click here to <Link to="/login">Login</Link>
+        </div>
+    }
+
     const [orders, setOrders] = useState([]);
 
     axios.post("http://localhost:4000/api/orders/getUserOrders", { userID: sessionStorage.getItem("userID") })
